@@ -1,7 +1,6 @@
-// Destructuring Objects and Arrays
-// - Unpack values from arrays, or properties from objects, into distinct variables.
-// - Object Destructuring relies on the property name in the object
-// - Array Destructuring relies on the order of the array
+// Rest / Spread Operator
+// - <Array> Rest Operator: need to be placed at the end of the array, used to unpack remaining information in the destructing operator
+// - <Object and Array> Spread Operator: used to unpack all the elements or properties of array and object in the destructing operator
 
 const data = [
   {
@@ -151,13 +150,7 @@ function getBook(id) {
 const books = getBooks();
 console.log(typeof books);
 
-// >> Destructuring Title and Author of book
-
-// Grabbing out from object property
-const book = getBook(2);
-const titleBook2 = book.title;
-const authorBook2 = book.author;
-console.log(authorBook2, titleBook2);
+const book = getBook(1);
 
 // Object Destructuring
 // - Relies on the property of the Object
@@ -183,9 +176,40 @@ console.log(
 // Array Destructuring
 // - Relies on the order of the Array
 
-// Getting element by index
-// const primaryGenre = genres[0];
-// const secondaryGenre = genres[1];
-
-const [primaryGenre, secondaryGenre] = genres;
+// >> Rest Operator (...)
+// - Must be at the end of the destructuring operation
+const [primaryGenre, secondaryGenre, ...otherGenres] = genres;
 console.log(primaryGenre, secondaryGenre);
+console.log(otherGenres);
+
+
+// >> Spread Operator (...)
+// - Getting all the values in the array and all the properties of the array 
+
+// Arrays
+const newGenres1 = [genres, 'epic fantasy']; // This puts the genres array onto the newGenres array  , making it a nested array
+
+// We want all the values and the new value in one array
+const newGenres = [...genres, 'epic fantasy'];  // Creates a new array with all the existing genre plus epic fantasy.
+console.log(newGenres);
+
+// Objects
+const updatedBook1 = {book, moviePublicationDate: '2001'}; // This puts the moviePublicationDate as a separate propery and the book object is nested inside it
+console.log(updatedBook1);
+
+// We want to just add a new property to a new array with existing properties
+const updatedBook ={...book, moviePublicationDate: '2001'};
+console.log(updatedBook);
+
+// Changing a value in a property using Spread Operator
+//- the value needs to be after the spread operator or the spread operator will overwrite it 
+const updatedBook2 ={
+  // Unpacking all existing properties
+  ...book, 
+  // Adding new Property
+  moviePublicationDate: '2001', 
+  //Overwriting an existing Property
+  author: 'Jason Liu'
+ };
+console.log(updatedBook2);
+
