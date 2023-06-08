@@ -1,6 +1,8 @@
-// Ternaries instead of If/Else Statement
-// - Can be added into string literal where an IF/ELSE Statement cannot be used as it does not return a value
-// - <SYNTAX> condition ? true-Operation: false-operation;
+// Allow Functions
+//  - Function Express where the traditional way of Function constructions is Functional Declaration
+//  - Method 1: without { } and return keyword (for One line of code in the function)
+//  - Method 2: with { } and return keyword (For Multiple lines of code in the function) 
+
 const data = [
   {
     id: 1,
@@ -151,8 +153,8 @@ console.log(typeof books);
 
 const book = getBook(2);
 
-// Object Destructuring
-// - Relies on the property of the Object
+// >> 1. Object Destructuring
+//  - Relies on the property of the Object
 const {
   title,
   author,
@@ -172,28 +174,28 @@ console.log(
   hasMovieAdaptation
 );
 
-// Array Destructuring
-// - Relies on the order of the Array
+// >> 2. Array Destructuring
+//  - Relies on the order of the Array
 
-// >> Rest Operator (...)
+// >> 3. Rest Operator (...)
 // - Must be at the end of the destructuring operation
 const [primaryGenre, secondaryGenre, ...otherGenres] = genres;
 console.log(primaryGenre, secondaryGenre);
 console.log(otherGenres);
 
 
-// >> Spread Operator (...)
+// >> 4. Spread Operator (...)
 // - Getting all the values in the array and all the properties of the array 
 
 
-// Arrays
+//  - Arrays
 const newGenres1 = [genres, 'epic fantasy']; // This puts the genres array onto the newGenres array  , making it a nested array
 
 // We want all the values and the new value in one array
 const newGenres = [...genres, 'epic fantasy'];  // Creates a new array with all the existing genre plus epic fantasy.
 console.log(newGenres);
 
-// Objects
+//  - Objects
 const updatedBook1 = {book, moviePublicationDate: '2001'}; // This puts the moviePublicationDate as a separate propery and the book object is nested inside it
 console.log(updatedBook1);
 
@@ -201,8 +203,8 @@ console.log(updatedBook1);
 const updatedBook ={...book, moviePublicationDate: '2001'};
 console.log(updatedBook);
 
-// Changing a value in a property using Spread Operator
-//- the value needs to be after the spread operator or the spread operator will overwrite it 
+//  - Changing a value in a property using Spread Operator
+//    - the value needs to be after the spread operator or the spread operator will overwrite it 
 const updatedBook2 ={
   // Unpacking all existing properties
   ...book, 
@@ -215,14 +217,31 @@ console.log(updatedBook2);
 
 
 
-// >> Ternary Operator
-// - Can be added into string literal where an IF/ELSE Statement cannot be used as it does not return a value
-// - <SYNTAX> condition ? true-Operation: false-operation;
+// >> 5. Ternary Operator
+//  - Can be added into string literal where an IF/ELSE Statement cannot be used as it does not return a value
+//  - <SYNTAX> condition ? true-Operation: false-operation;
 
 const pagesRange = pages > 1000 ? `Over a thousand pages`: `Less than one thousand pages`
 console.log(`The book has ${pagesRange}`);
 
-const summary = `${title}, a ${pages} pages long book, was written by ${author} and published in ${publicationDate.split("-")[0]}.
+
+// >> 6. Arrow Functions
+//  - Function Express where the traditional way of Function constructions is Functional Declaration
+
+//  - Method 1 (without { } and return keyword)
+//    - For one line function
+const dateToYear = (str) => str.split("-")[0];
+console.log(dateToYear(publicationDate)) ;
+
+//  - Method 2 ( with { } and return keyword)
+//    - For function with multiple lines
+const getYear = (str) => {
+  const year = str.split("-")[0];
+  return year;   // This way Return Keyword is a must or it will return UNDEFINED
+}
+console.log(getYear(publicationDate));
+
+const summary = `${title}, a ${pages} pages long book, was written by ${author} and published in ${dateToYear(publicationDate)}.
 The book has ${hasMovieAdaptation ? '' : 'not '}been adapted as a movie }`;
 
 console.log(summary);
