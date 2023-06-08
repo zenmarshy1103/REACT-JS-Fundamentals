@@ -1,8 +1,7 @@
-// Allow Functions
-//  - Function Express where the traditional way of Function constructions is Functional Declaration
-//  - Method 1: without { } and return keyword (for One line of code in the function)
-//  - Method 2: with { } and return keyword (For Multiple lines of code in the function) 
-
+// Short Circuiting and Logical Operators (&&, ||, ??)
+// - && AND Short Circuiting - When the value is false, return the false value (Falsy Value: 0 , '', null, undefined )
+// - || OR Short Circuiting - When the value is true, return the true value  (Falsy Value: 0 , '', null, undefined )
+// - ?? Nullish Coalescing Short Circuiting - When the value is true, return the true value (0 is now a true value) (Falsy Value: '', null, undefined )
 const data = [
   {
     id: 1,
@@ -245,3 +244,40 @@ const summary = `${title}, a ${pages} pages long book, was written by ${author} 
 The book has ${hasMovieAdaptation ? '' : 'not '}been adapted as a movie }`;
 
 console.log(summary);
+
+// >> 7. Short Circuiting and Logical Operations
+//  - Falsy Value: 0 , '', null, undefined
+//  - Mainly used as a IF statement without the ELSE (id if true or if false )
+// AND Short Circuiting - &&
+// OR Short Circuiting - ||
+// Nullish Coalescing Short Circuiting - ??
+
+// AND Short Circuiting
+// - Falsy Value: 0 , '', null, undefined
+// - when the value is false, return the false value 
+console.log(true && "some string") // will return the value that is false in this case it is "some string"
+console.log(false && "Some String") // return false instead
+console.log(hasMovieAdaptation && 'this book has a movie');  
+
+console.log(0 && "some string") // 0 is a falsy value so immediately it is returned 
+
+// OR Short Circuiting
+// - Falsy Value: 0 , '', null, undefined
+// - when the value is true, return the value
+console.log(true || `some string`);
+console.log(false || `some string`);
+
+console.log(book.translations.spanish) // This returns undefined which is a falsy value
+console.log(book.translations.chinese || 'does not have Chinese Translation'); // here the there is chinese translation so it is true so the value is returned
+
+console.log(book.reviews.librarything.reviewsCount);
+console.log(book.reviews.librarything.reviewsCount || 'No Data'); // 0 is falsy so 'No Data' is returned
+
+// Nullish Coalescing Short Circuiting
+// - When the value is true, return the true value
+// - treats 0 as truthy value
+// - Falsy Value: '', null, undefined
+
+console.log(book.reviews.librarything.reviewsCount ?? 'No Data'); // Returns 0
+
+
