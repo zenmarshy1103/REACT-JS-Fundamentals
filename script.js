@@ -1,7 +1,6 @@
-// Rest / Spread Operator
-// - <Array> Rest Operator: need to be placed at the end of the array, used to unpack remaining information in the destructing operator
-// - <Object and Array> Spread Operator: used to unpack all the elements or properties of array and object in the destructing operator
-
+// Ternaries instead of If/Else Statement
+// - Can be added into string literal where an IF/ELSE Statement cannot be used as it does not return a value
+// - <SYNTAX> condition ? true-Operation: false-operation;
 const data = [
   {
     id: 1,
@@ -150,7 +149,7 @@ function getBook(id) {
 const books = getBooks();
 console.log(typeof books);
 
-const book = getBook(1);
+const book = getBook(2);
 
 // Object Destructuring
 // - Relies on the property of the Object
@@ -186,6 +185,7 @@ console.log(otherGenres);
 // >> Spread Operator (...)
 // - Getting all the values in the array and all the properties of the array 
 
+
 // Arrays
 const newGenres1 = [genres, 'epic fantasy']; // This puts the genres array onto the newGenres array  , making it a nested array
 
@@ -213,3 +213,16 @@ const updatedBook2 ={
  };
 console.log(updatedBook2);
 
+
+
+// >> Ternary Operator
+// - Can be added into string literal where an IF/ELSE Statement cannot be used as it does not return a value
+// - <SYNTAX> condition ? true-Operation: false-operation;
+
+const pagesRange = pages > 1000 ? `Over a thousand pages`: `Less than one thousand pages`
+console.log(`The book has ${pagesRange}`);
+
+const summary = `${title}, a ${pages} pages long book, was written by ${author} and published in ${publicationDate.split("-")[0]}.
+The book has ${hasMovieAdaptation ? '' : 'not '}been adapted as a movie }`;
+
+console.log(summary);
