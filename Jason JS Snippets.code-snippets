@@ -1,0 +1,29 @@
+// <SYNTAX>
+// "HTML Snippet": {
+//     "prefix": "html",
+//     "body": [
+//       "<!DOCTYPE html>",
+//       "<html>",
+//       "  <head>",
+//       "    <title>$1</title>",
+//       "  </head>",
+//       "  <body>",
+//       "    $2",
+//       "  </body>",
+//       "</html>"
+//     ],
+//     "description": "HTML template"
+
+//Global Snippets
+{
+	// >> console.log statement
+	"console.log": {
+    	"prefix": "clg",
+    	"body": ["console.log($1);"], // $1: where the keyboard curser will be located at
+    	"description": "console.log statement"
+  	}
+
+	
+
+
+}

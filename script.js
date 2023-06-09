@@ -1,7 +1,7 @@
-// Short Circuiting and Logical Operators (&&, ||, ??)
-// - && AND Short Circuiting - When the value is false, return the false value (Falsy Value: 0 , '', null, undefined )
-// - || OR Short Circuiting - When the value is true, return the true value  (Falsy Value: 0 , '', null, undefined )
-// - ?? Nullish Coalescing Short Circuiting - When the value is true, return the true value (0 is now a true value) (Falsy Value: '', null, undefined )
+// Optional Chaining
+// - Used to check if all the values / property that we expect exist in an object using ? after a property we are trying to use
+
+'use strict';
 const data = [
   {
     id: 1,
@@ -150,7 +150,8 @@ function getBook(id) {
 const books = getBooks();
 console.log(typeof books);
 
-const book = getBook(2);
+// const book = getBook(2);
+const book = getBook(3);
 
 // >> 1. Object Destructuring
 //  - Relies on the property of the Object
@@ -270,14 +271,25 @@ console.log(false || `some string`);
 console.log(book.translations.spanish) // This returns undefined which is a falsy value
 console.log(book.translations.chinese || 'does not have Chinese Translation'); // here the there is chinese translation so it is true so the value is returned
 
-console.log(book.reviews.librarything.reviewsCount);
-console.log(book.reviews.librarything.reviewsCount || 'No Data'); // 0 is falsy so 'No Data' is returned
+// console.log(book.reviews.librarything.reviewsCount);
+// console.log(book.reviews.librarything.reviewsCount || 'No Data'); // 0 is falsy so 'No Data' is returned
 
 // Nullish Coalescing Short Circuiting
 // - When the value is true, return the true value
 // - treats 0 as truthy value
 // - Falsy Value: '', null, undefined
 
-console.log(book.reviews.librarything.reviewsCount ?? 'No Data'); // Returns 0
+// console.log(book.reviews.librarything.reviewsCount ?? 'No Data'); // Returns 0
 
-
+// >> 8. Optional Chaining
+//  - Used to check if all the values / property that we expect exist in an object using ? after a property we are trying to use
+function getTotalReviewCount(book) {
+  //JS will chain the function when the former thing is not undefined
+  
+  const goodRead = book.reviews?.goodreads?.reviewsCount ?? 0; // Null operator used to set default value of 0 when the LHS is falsy
+  console.log(goodRead);
+  const libraryThing = book.reviews?.librarythingt?.reviewsCount ?? 0;
+  console.log(libraryThing);
+  return goodRead + libraryThing;
+}
+console.log(getTotalReviewCount(book));
