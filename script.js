@@ -1,13 +1,14 @@
-// Array - Map Method
+// Array - Filter Method
 //  - (Functional Array Method)
 //    - Does not mutate the original array
 //    - Returns a new array based on the original one
 //  - <THEORY>
-//    - Loop over an array, return a new array with the same length with some operation applied to each of the elements of the original array
+//    - Loop over an array, return a new array only with the elements that turns true for the call back function that returns true 
+//    - element that returns false is filtered out
 //  - <SYNTAX>
-//    [arrElement].map(callbackfunction(arrElement))   
-//    the arrElement argument for the call back function is current element in the loop 
-
+//    [arrElement].filter(callbackfunction(arrElement))   
+//    the arrElement argument for the call back function is current element in the loop
+//    the call back function only can return true or false   
 'use strict';
 const data = [
   {
@@ -192,3 +193,26 @@ const essentialData = books.map(book => ({  //returns an object
 
 console.log(essentialData);
 
+
+// >> 2. The Array Filter Method
+//  - (Functional Array Method)
+//    - Does not mutate the original array
+//    - Returns a new array based on the original one
+//  - <THEORY>
+//    - Loop over an array, return a new array only with the elements that turns true for the call back function that returns true 
+//    - element that returns false is filtered out
+//  - <SYNTAX>
+//    [arrElement].filter(callbackfunction(arrElement))   
+//    the arrElement argument for the call back function is current element in the loop
+//    the call back function only can return true or false
+
+// Returns a new array with book elements of the books array that has pages more than 500 pages
+const longBooks = books.filter((book) => book.pages > 500); // Returns a new array with book elements of the books array that has pages more than 500 pages
+
+// Returns a new array with book elements of the books array that has pages more than 500 pages and hasMovieAdaptation is true
+const longBooksWithMovie = books.filter((book) => book.pages > 500).filter((book) => book.hasMovieAdaptation);  //Method Chaining
+console.log(longBooksWithMovie);
+
+// Return a new array with only the book title with genres that has adventure 
+const adventureBooks = books.filter((book) => book.genres.includes("adventure")).map((book) => book.title); //genres is an array type in the object so array method .includes can be used 
+console.log(adventureBooks);
