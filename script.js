@@ -1,5 +1,12 @@
-// Optional Chaining
-// - Used to check if all the values / property that we expect exist in an object using ? after a property we are trying to use
+// Array - Map Method
+//  - (Functional Array Method)
+//    - Does not mutate the original array
+//    - Returns a new array based on the original one
+//  - <THEORY>
+//    - Loop over an array, return a new array with the same length with some operation applied to each of the elements of the original array
+//  - <SYNTAX>
+//    [arrElement].map(callbackfunction(arrElement))   
+//    the arrElement argument for the call back function is current element in the loop 
 
 'use strict';
 const data = [
@@ -147,149 +154,41 @@ function getBook(id) {
   return data.find((d) => d.id === id);
 }
 
+// >> 1. The Array Map Method
+//  - (Functional Array Method)
+//    - Does not mutate the original array
+//    - Returns a new array based on the original one
+//  - <THEORY>
+//    - Loop over an array, return a new array with the same length with some operation applied to each of the elements of the original array
+//  - <SYNTAX>
+//    [arrElement].map(callbackfunction(arrElement))   
+//    the arrElement argument for the call back function is current element in the loop
+
+const xArray = [1,2,3,4].map((arrayElement) => arrayElement * 2 ); // Multiply each of the element by 2 and returns a new array
+console.log(xArray);
+
 const books = getBooks();
-console.log(typeof books);
+console.log(books);
 
-// const book = getBook(2);
-const book = getBook(3);
+// Return a new array with all the titles of the books array
+const titles = books.map((book) => book.title );
+console.log(titles);
 
-// >> 1. Object Destructuring
-//  - Relies on the property of the Object
-const {
-  title,
-  author,
-  pages,
-  publicationDate,
-  genres,
-  translations,
-  hasMovieAdaptation,
-} = book; // the {var1, var2} has to be the exact same as the property name in the object, to get the correct info out of the object
-console.log(
-  title,
-  author,
-  pages,
-  publicationDate,
-  genres,
-  translations,
-  hasMovieAdaptation
-);
-
-// >> 2. Array Destructuring
-//  - Relies on the order of the Array
-
-// >> 3. Rest Operator (...)
-// - Must be at the end of the destructuring operation
-const [primaryGenre, secondaryGenre, ...otherGenres] = genres;
-console.log(primaryGenre, secondaryGenre);
-console.log(otherGenres);
-
-
-// >> 4. Spread Operator (...)
-// - Getting all the values in the array and all the properties of the array 
-
-
-//  - Arrays
-const newGenres1 = [genres, 'epic fantasy']; // This puts the genres array onto the newGenres array  , making it a nested array
-
-// We want all the values and the new value in one array
-const newGenres = [...genres, 'epic fantasy'];  // Creates a new array with all the existing genre plus epic fantasy.
-console.log(newGenres);
-
-//  - Objects
-const updatedBook1 = {book, moviePublicationDate: '2001'}; // This puts the moviePublicationDate as a separate propery and the book object is nested inside it
-console.log(updatedBook1);
-
-// We want to just add a new property to a new array with existing properties
-const updatedBook ={...book, moviePublicationDate: '2001'};
-console.log(updatedBook);
-
-//  - Changing a value in a property using Spread Operator
-//    - the value needs to be after the spread operator or the spread operator will overwrite it 
-const updatedBook2 ={
-  // Unpacking all existing properties
-  ...book, 
-  // Adding new Property
-  moviePublicationDate: '2001', 
-  //Overwriting an existing Property
-  author: 'Jason Liu'
- };
-console.log(updatedBook2);
-
-
-
-// >> 5. Ternary Operator
-//  - Can be added into string literal where an IF/ELSE Statement cannot be used as it does not return a value
-//  - <SYNTAX> condition ? true-Operation: false-operation;
-
-const pagesRange = pages > 1000 ? `Over a thousand pages`: `Less than one thousand pages`
-console.log(`The book has ${pagesRange}`);
-
-
-// >> 6. Arrow Functions
-//  - Function Express where the traditional way of Function constructions is Functional Declaration
-
-//  - Method 1 (without { } and return keyword)
-//    - For one line function
-const dateToYear = (str) => str.split("-")[0];
-console.log(dateToYear(publicationDate)) ;
-
-//  - Method 2 ( with { } and return keyword)
-//    - For function with multiple lines
-const getYear = (str) => {
-  const year = str.split("-")[0];
-  return year;   // This way Return Keyword is a must or it will return UNDEFINED
-}
-console.log(getYear(publicationDate));
-
-const summary = `${title}, a ${pages} pages long book, was written by ${author} and published in ${dateToYear(publicationDate)}.
-The book has ${hasMovieAdaptation ? '' : 'not '}been adapted as a movie }`;
-
-console.log(summary);
-
-// >> 7. Short Circuiting and Logical Operations
-//  - Falsy Value: 0 , '', null, undefined
-//  - Mainly used as a IF statement without the ELSE (id if true or if false )
-// AND Short Circuiting - &&
-// OR Short Circuiting - ||
-// Nullish Coalescing Short Circuiting - ??
-
-// AND Short Circuiting
-// - Falsy Value: 0 , '', null, undefined
-// - when the value is false, return the false value 
-console.log(true && "some string") // will return the value that is false in this case it is "some string"
-console.log(false && "Some String") // return false instead
-console.log(hasMovieAdaptation && 'this book has a movie');  
-
-console.log(0 && "some string") // 0 is a falsy value so immediately it is returned 
-
-// OR Short Circuiting
-// - Falsy Value: 0 , '', null, undefined
-// - when the value is true, return the value
-console.log(true || `some string`);
-console.log(false || `some string`);
-
-console.log(book.translations.spanish) // This returns undefined which is a falsy value
-console.log(book.translations.chinese || 'does not have Chinese Translation'); // here the there is chinese translation so it is true so the value is returned
-
-// console.log(book.reviews.librarything.reviewsCount);
-// console.log(book.reviews.librarything.reviewsCount || 'No Data'); // 0 is falsy so 'No Data' is returned
-
-// Nullish Coalescing Short Circuiting
-// - When the value is true, return the true value
-// - treats 0 as truthy value
-// - Falsy Value: '', null, undefined
-
-// console.log(book.reviews.librarything.reviewsCount ?? 'No Data'); // Returns 0
-
-// >> 8. Optional Chaining
-//  - Used to check if all the values / property that we expect exist in an object using ? after a property we are trying to use
-function getTotalReviewCount(book) {
-  //JS will chain the function when the former thing is not undefined
+// Return only the title and author of the books array in an object
+// const essentialData = books.map(book => {
   
-  const goodRead = book.reviews?.goodreads?.reviewsCount ?? 0; // Null operator used to set default value of 0 when the LHS is falsy
-  console.log(goodRead);
-  const libraryThing = book.reviews?.librarythingt?.reviewsCount ?? 0;
-  console.log(libraryThing);
-  return goodRead + libraryThing;
-}
-console.log(getTotalReviewCount(book));
+// //returns an object
+//   return {
+//     title: book.title,
+//     author: book.author,
+//   }
+// })
+
+// Clean up the code use () to wrap around the object and take away the return statement
+const essentialData = books.map(book => ({  //returns an object   
+  title: book.title,
+  author: book.author,
+}));
+
+console.log(essentialData);
+
