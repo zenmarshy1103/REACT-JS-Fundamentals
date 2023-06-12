@@ -1,15 +1,13 @@
-// Array - Filter Method
+// The Array Reduce Method
 //  - (Functional Array Method)
 //    - Does not mutate the original array
 //    - Returns a new array based on the original one
 //  - <THEORY>
-//    - Loop over an array, return a new array only with the elements that turns true for the call back function that returns true 
-//    - element that returns false is filtered out
+//    - Loop over an array, return a new array with one value
 //  - <SYNTAX>
-//    [arrElement].filter(callbackfunction(arrElement))   
+//    [arrElement].reduce(callbackfunction(accumulator, arrElement), startValueOfAccumulator )   
 //    the arrElement argument for the call back function is current element in the loop
-//    the call back function only can return true or false   
-'use strict';
+
 const data = [
   {
     id: 1,
@@ -216,3 +214,18 @@ console.log(longBooksWithMovie);
 // Return a new array with only the book title with genres that has adventure 
 const adventureBooks = books.filter((book) => book.genres.includes("adventure")).map((book) => book.title); //genres is an array type in the object so array method .includes can be used 
 console.log(adventureBooks);
+
+// >> 3. The Array Reduce Method
+//  - (Functional Array Method)
+//    - Does not mutate the original array
+//    - Returns a new array based on the original one
+//  - <THEORY>
+//    - Loop over an array, return a new array with one value
+//  - <SYNTAX>
+//    [arrElement].reduce(callbackfunction(accumulator, arrElement), startValueOfAccumulator )   
+//    the arrElement argument for the call back function is current element in the loop
+
+
+// Perform mathematical operation with numbers in the array
+const pagesAllBooks = books.reduce((accumulator, book) => accumulator + book.pages, 0); // 1st iteration accumulator is 0 (the second argument of the reduce method) then after the 1st iteration the 2nd argument becomes the calculated value of the 1st iteration operation (0 + 1216)
+console.log(pagesAllBooks);                                                             // 2nd iteration accumulator is 1216, after this iteration accumulator becomes ( 1216 + 295) ... and so on until all the array element are completed
