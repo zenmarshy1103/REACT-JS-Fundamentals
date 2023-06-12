@@ -1,12 +1,14 @@
-// The Array Reduce Method
-//  - (Functional Array Method)
-//    - Does not mutate the original array
-//    - Returns a new array based on the original one
+// The Array Sort Method
+//  - (NOT Functional Array Method)
+//    - Mutates the original array
 //  - <THEORY>
 //    - Loop over an array, return a new array with one value
+//    - In React always good to leave original array, so make a copy of the original array first using .slice() then perform .sort()
 //  - <SYNTAX>
-//    [arrElement].reduce(callbackfunction(accumulator, arrElement), startValueOfAccumulator )   
-//    the arrElement argument for the call back function is current element in the loop
+//    [arrElement].slice().sort(callbackfunction(currentElementValue, nextElementValue ) )
+//  when the return value of the call back function is:
+//    - negative the values will be sorted in ascending way (a - b)
+//    - positive the values will be sorted in descending way (b - a)
 
 const data = [
   {
@@ -160,22 +162,22 @@ function getBook(id) {
 //  - <THEORY>
 //    - Loop over an array, return a new array with the same length with some operation applied to each of the elements of the original array
 //  - <SYNTAX>
-//    [arrElement].map(callbackfunction(arrElement))   
+//    [arrElement].map(callbackfunction(arrElement))
 //    the arrElement argument for the call back function is current element in the loop
 
-const xArray = [1,2,3,4].map((arrayElement) => arrayElement * 2 ); // Multiply each of the element by 2 and returns a new array
+const xArray = [1, 2, 3, 4].map((arrayElement) => arrayElement * 2); // Multiply each of the element by 2 and returns a new array
 console.log(xArray);
 
 const books = getBooks();
 console.log(books);
 
 // Return a new array with all the titles of the books array
-const titles = books.map((book) => book.title );
+const titles = books.map((book) => book.title);
 console.log(titles);
 
 // Return only the title and author of the books array in an object
 // const essentialData = books.map(book => {
-  
+
 // //returns an object
 //   return {
 //     title: book.title,
@@ -184,23 +186,23 @@ console.log(titles);
 // })
 
 // Clean up the code use () to wrap around the object and take away the return statement
-const essentialData = books.map(book => ({  //returns an object   
+const essentialData = books.map((book) => ({
+  //returns an object
   title: book.title,
   author: book.author,
 }));
 
 console.log(essentialData);
 
-
 // >> 2. The Array Filter Method
 //  - (Functional Array Method)
 //    - Does not mutate the original array
 //    - Returns a new array based on the original one
 //  - <THEORY>
-//    - Loop over an array, return a new array only with the elements that turns true for the call back function that returns true 
+//    - Loop over an array, return a new array only with the elements that turns true for the call back function that returns true
 //    - element that returns false is filtered out
 //  - <SYNTAX>
-//    [arrElement].filter(callbackfunction(arrElement))   
+//    [arrElement].filter(callbackfunction(arrElement))
 //    the arrElement argument for the call back function is current element in the loop
 //    the call back function only can return true or false
 
@@ -208,11 +210,15 @@ console.log(essentialData);
 const longBooks = books.filter((book) => book.pages > 500); // Returns a new array with book elements of the books array that has pages more than 500 pages
 
 // Returns a new array with book elements of the books array that has pages more than 500 pages and hasMovieAdaptation is true
-const longBooksWithMovie = books.filter((book) => book.pages > 500).filter((book) => book.hasMovieAdaptation);  //Method Chaining
+const longBooksWithMovie = books
+  .filter((book) => book.pages > 500)
+  .filter((book) => book.hasMovieAdaptation); //Method Chaining
 console.log(longBooksWithMovie);
 
-// Return a new array with only the book title with genres that has adventure 
-const adventureBooks = books.filter((book) => book.genres.includes("adventure")).map((book) => book.title); //genres is an array type in the object so array method .includes can be used 
+// Return a new array with only the book title with genres that has adventure
+const adventureBooks = books
+  .filter((book) => book.genres.includes("adventure"))
+  .map((book) => book.title); //genres is an array type in the object so array method .includes can be used
 console.log(adventureBooks);
 
 // >> 3. The Array Reduce Method
@@ -222,10 +228,38 @@ console.log(adventureBooks);
 //  - <THEORY>
 //    - Loop over an array, return a new array with one value
 //  - <SYNTAX>
-//    [arrElement].reduce(callbackfunction(accumulator, arrElement), startValueOfAccumulator )   
+//    [arrElement].reduce(callbackfunction(accumulator, arrElement), startValueOfAccumulator )
 //    the arrElement argument for the call back function is current element in the loop
 
-
 // Perform mathematical operation with numbers in the array
-const pagesAllBooks = books.reduce((accumulator, book) => accumulator + book.pages, 0); // 1st iteration accumulator is 0 (the second argument of the reduce method) then after the 1st iteration the 2nd argument becomes the calculated value of the 1st iteration operation (0 + 1216)
-console.log(pagesAllBooks);                                                             // 2nd iteration accumulator is 1216, after this iteration accumulator becomes ( 1216 + 295) ... and so on until all the array element are completed
+const pagesAllBooks = books.reduce(
+  (accumulator, book) => accumulator + book.pages,
+  0
+); // 1st iteration accumulator is 0 (the second argument of the reduce method) then after the 1st iteration the 2nd argument becomes the calculated value of the 1st iteration operation (0 + 1216)
+console.log(pagesAllBooks); // 2nd iteration accumulator is 1216, after this iteration accumulator becomes ( 1216 + 295) ... and so on until all the array element are completed
+
+// >> 4. The Array Sort Method
+//  - (NOT Functional Array Method)
+//    - Mutates the original array
+//  - <THEORY>
+//    - Loop over an array, return a new array with one value
+//      - In React always good to leave original array, so make a copy of the original array first using .slice() then perform .sort()
+//  - <SYNTAX>
+//    [arrElement].sort(callbackfunction(currentElementValue, nextElementValue ) )
+//  when the return value of the call back function is:
+//    - negative the values will be sorted in ascending way (a - b)
+//    - positive the values will be sorted in descending way (b - a)
+
+const x = [3, 7, 1, 9, 6];
+// Using .slice() to make a copy of the original array to the new array variable and work with it without mutating the original array
+const sorted = x.slice().sort((a, b) => a - b);   //a is the currentElementValue of array and b is the nextElementValue of the array
+// when the return value of the call back function is:
+//  - negative the values will be sorted in ascending way (a - b)
+//  - positive the values will be sorted in descending way (b - a)
+console.log(x)
+console.log(sorted);
+
+// Applying .sort() on object elements in the array (Use Case for React and Real World Scenario)
+// Sorting the book array with object element from book with longest pages to shortest pages (Ascending Way)
+const sortedByPages = books.slice().sort((a, b) => b.pages - a.pages)  // a and b gets the value of the array , since we are using book array's pages property in the array to arrange the object element in the array
+console.log(sortedByPages);  
