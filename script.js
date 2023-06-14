@@ -1,4 +1,7 @@
-// Asynchronous JavaScript - Promises
+// Asynchronous JavaScript - ASYNC / AWAIT
+// - In a ASYNC function:
+//    - JS will not move to the next line in the async function like what promises do
+//    - Pausing the code inside a function
  
 const data = [
   {
@@ -163,11 +166,24 @@ function getBook(id) {
 // .then() function will be executed when the promise returns fulfilled 
 //  - .then() argument has to be a callback function in it will its argument of the response that the fetch function has received
 //  - API are JSON so it needs to be converted from JSON to JS object (res.json())
-fetch("https://jsonplaceholder.typicode.com/todos").then((res) => res.json()).then((data) => console.log(data)); // API from jsonplaceholder website
+// fetch("https://jsonplaceholder.typicode.com/todos").then((res) => res.json()).then((data) => console.log(data)); // API from jsonplaceholder website
 
 // JS will not wait until the fetch is fetch but will run the code below immediately (if asynchronous technique was not implemented)
 //  - 1. Execute fetch function and immediately move to the next line of code
-console.log("Jason");
+// console.log("Jason");
+
+// >> 2. ASYNC Function  (async / await)
+async function getTodos() {
+  //JS will not move to the next line in the async function like what promises do
+  // Pausing the code inside a function
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");  //the response of the fetch is the data from the API 
+  const data = await res.json();
+  console.log(data);  
+
+}
+
+getTodos();
+
 
 
 
